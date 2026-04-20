@@ -7,6 +7,9 @@ export async function simulateWorkflow(payload: SimulationRequest): Promise<Simu
     body: JSON.stringify(payload),
   });
   if (!res.ok) {
+    if (res.status === 404) {
+      throw new Error('Simulation API not found. Please ensure the Service Worker is registered.');
+    }
     const err = await res.json().catch(() => ({ summary: 'Unknown error' }));
     throw new Error(err.summary || 'Simulation failed');
   }
