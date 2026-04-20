@@ -27,7 +27,6 @@
 @media (max-width: 1024px) {
   .app:global(.sidebarOpen) .main {
     transform: translateX(var(--mobile-sidebar-w));
-    pointer-events: none;
     opacity: 0.5;
   }
 }

@@ -289,6 +289,13 @@ const App: React.FC = () => {
         onTemplateLoad={handleTemplateLoad} 
         customTemplateKeys={Object.keys(customTemplates)} 
       />
+
+      {isSidebarOpen && (
+        <div 
+          className={styles.sidebarBackdrop} 
+          onClick={() => useWorkflowStore.getState().setSidebarOpen(false)} 
+        />
+      )}
       
       <div className={styles.main}>
         <CanvasToolbar
