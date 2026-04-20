@@ -1,0 +1,21 @@
+.app {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.canvasWrap {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}

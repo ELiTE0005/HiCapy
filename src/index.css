@@ -1,0 +1,115 @@
+/* ─── Reset ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── Root Tokens ───────────────────────────────────────────────────────────── */
+:root {
+  --bg:        #09090b;
+  --bg2:       #18181b;
+  --bg3:       #27272a;
+  --bg4:       #3f3f46;
+  --border:    rgba(255,255,255,0.07);
+  --border2:   rgba(255,255,255,0.12);
+  --text:      #e8ecf4;
+  --text2:     #8b93a8;
+  --text3:     #555f78;
+  --accent:    #4f7cff;
+  --accent2:   #7b5cf0;
+  --green:     #22c55e;
+  --amber:     #f59e0b;
+  --red:       #ef4444;
+  --teal:      #14b8a6;
+  --pink:      #ec4899;
+  
+  --node-start:#16a34a;
+  --node-task: #1d4ed8;
+  --node-appr: #7c3aed;
+  --node-auto: #b45309;
+  --node-end:  #be123c;
+  
+  --hover-bg:  rgba(255,255,255,0.04);
+  --active-bg: rgba(255,255,255,0.08);
+  --vignette:  radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, rgba(10,12,20,0.55) 100%);
+  --minimap-mask: rgba(10,12,20,0.6);
+  --controls-bg: rgba(18,20,33,0.9);
+  
+  --r:         10px;
+  --r2:        7px;
+  --sidebar-w: 220px;
+  --panel-w:   300px;
+  --toolbar-h: 52px;
+  
+  /* Legacy compat map */
+  --bg-base:    var(--bg);
+  --bg-surface: var(--bg2);
+  --bg-card:    var(--bg3);
+  --text-primary: var(--text);
+  --text-secondary: var(--text2);
+  --text-muted: var(--text3);
+  
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  --bg:        #eeeae3; /* beige canvas background */
+  --bg2:       #f8f6f2; /* sidebar, toolbar, panels — slightly warmer white */
+  --bg3:       #ede9e1; /* cards inside panels */
+  --bg4:       #e2ddd6; /* input backgrounds, progress track */
+  --border:    rgba(0, 0, 0, 0.12);
+  --border2:   rgba(0, 0, 0, 0.20);
+  --text:      #1a1d27;
+  --text2:     #4b5563;
+  --text3:     #6b7280;
+
+  --hover-bg:  rgba(0,0,0,0.05);
+  --active-bg: rgba(0,0,0,0.09);
+  --vignette:  radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, rgba(0,0,0,0.06) 100%);
+  --minimap-mask: rgba(238,234,227,0.7);
+  --controls-bg: rgba(248,246,242,0.95);
+
+  /* Keep bright accents mostly the same, or tweak them for light mode */
+  --accent:    #4f46e5;
+  --accent2:   #7c3aed;
+
+  --bg-base:    var(--bg);
+  --bg-surface: var(--bg2);
+  --bg-card:    var(--bg3);
+  --text-primary: var(--text);
+  --text-secondary: var(--text2);
+  --text-muted: var(--text3);
+
+  color-scheme: light;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+/* ─── React Flow Global Overrides ────────────────────────────────────────────── */
+.react-flow__background { background: var(--bg); }
+.react-flow__edge-path { stroke: var(--accent); }
+.react-flow__edge.selected .react-flow__edge-path { stroke: var(--accent); stroke-width: 2.5; }
+.react-flow__edge-path:hover { stroke: #a5b4fc; }
+.react-flow__connection-path { stroke: var(--accent) !important; }
+.react-flow__node.selected { filter: none; }
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideInRight {
+  from { transform: translateX(20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}

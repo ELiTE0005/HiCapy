@@ -1,0 +1,80 @@
+.canvasWrapper {
+  flex: 1;
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.canvasWrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--vignette);
+  z-index: 4;
+}
+
+/* React Flow overrides */
+:global(.react-flow__edge-path) { stroke: #6366f1; }
+:global(.react-flow__edge.selected .react-flow__edge-path) { stroke: #818cf8; }
+
+.controls {
+  bottom: 16px !important;
+  left: 16px !important;
+}
+:global(.react-flow__controls) {
+  background: var(--controls-bg) !important;
+  border: 1px solid var(--border2) !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
+}
+:global(.react-flow__controls-button) {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+  color: #8b9cc8 !important;
+  fill: #8b9cc8 !important;
+}
+:global(.react-flow__controls-button:hover) { background: rgba(99,102,241,0.15) !important; }
+:global(.react-flow__controls-button svg) { fill: #8b9cc8 !important; }
+
+.minimap {
+  bottom: 40px !important;
+  right: 0px !important;
+  border-radius: var(--r) 0 0 var(--r) !important; /* Only left side rounded if flush to right, target says right:0 */
+  overflow: hidden;
+  border: 1px solid var(--border2) !important;
+  background: var(--bg2) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4) !important;
+  z-index: 5;
+}
+
+:global(.react-flow__minimap-mask) {
+  fill: var(--minimap-mask) !important;
+}
+
+.emptyState {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+}
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.15;
+}
+.emptyTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.2);
+  margin: 0 0 8px;
+}
+.emptyDesc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.12);
+  max-width: 300px;
+}

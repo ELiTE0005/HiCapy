@@ -1,0 +1,107 @@
+.toolbar {
+  height: var(--toolbar-h);
+  flex-shrink: 0;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  z-index: 9;
+}
+
+.toolbarWorkflowName {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  padding: 5px 8px;
+  border-radius: var(--r2);
+  transition: background 0.15s;
+}
+
+.toolbarWorkflowName:hover {
+  background: var(--bg3);
+}
+
+.toolbarChevron {
+  font-size: 10px;
+  color: var(--text3);
+}
+
+.toolbarSub {
+  font-size: 12px;
+  color: var(--text3);
+  margin-left: 2px;
+}
+
+.toolbarSep {
+  width: 1px;
+  height: 22px;
+  background: var(--border);
+  margin: 0 4px;
+}
+
+.tbBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: var(--r2);
+  border: none;
+  background: transparent;
+  color: var(--text2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tbBtn:hover:not(:disabled) {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+.tbBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.primary {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 500;
+}
+
+.primary:hover {
+  background: #3d6ce0;
+}
+
+.tbBtn svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.toolbarRight {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nameInput {
+  background: var(--bg3);
+  border: 1px solid var(--accent);
+  border-radius: var(--r2);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 4px 8px;
+  outline: none;
+  width: 180px;
+}
