@@ -150,7 +150,7 @@ const App: React.FC = () => {
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [customTemplates, setCustomTemplates] = useState<Record<string, { nodes: Node[]; edges: Edge[] }>>({});
   const [isAppLoading, setIsAppLoading] = useState(true);
-  const { nodes, edges, setWorkflow, undo, redo } = useWorkflowStore();
+  const { nodes, edges, setWorkflow, undo, redo, isSidebarOpen } = useWorkflowStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // App initialization loader
@@ -284,7 +284,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className={styles.app}>
+    <div className={`${styles.app} ${isSidebarOpen ? 'sidebarOpen' : ''}`}>
       <NodeSidebar 
         onTemplateLoad={handleTemplateLoad} 
         customTemplateKeys={Object.keys(customTemplates)} 

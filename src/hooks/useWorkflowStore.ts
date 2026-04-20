@@ -9,6 +9,9 @@ interface WorkflowState {
   nodes: Node[];
   edges: Edge[];
   selectedNodeId: string | null;
+  isSidebarOpen: boolean;
+  setSidebarOpen: (open: boolean) => void;
+  toggleSidebar: () => void;
 
   // Undo / Redo
   history: HistorySnapshot[];
@@ -60,6 +63,9 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
   nodes: [],
   edges: [],
   selectedNodeId: null,
+  isSidebarOpen: window.innerWidth > 1024,
+  setSidebarOpen: (open) => set({ isSidebarOpen: open }),
+  toggleSidebar: () => set((s) => ({ isSidebarOpen: !s.isSidebarOpen })),
   history: [],
   future: [],
 

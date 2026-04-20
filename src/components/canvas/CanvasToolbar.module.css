@@ -7,7 +7,19 @@
   align-items: center;
   gap: 8px;
   padding: 0 18px;
-  z-index: 9;
+  z-index: 110;
+}
+
+.menuBtn {
+  display: none !important;
+}
+
+@media (max-width: 1024px) {
+  .menuBtn {
+    display: flex !important;
+    margin-right: 4px;
+    color: var(--accent) !important;
+  }
 }
 
 .toolbarWorkflowName {
@@ -63,6 +75,28 @@
 .tbBtn:hover:not(:disabled) {
   background: var(--bg3);
   color: var(--text);
+}
+
+@media (max-width: 1024px) {
+  .tbBtn {
+    padding: 6px 8px; /* Slightly tighter on mobile */
+  }
+}
+
+.btnText {
+  display: inline;
+}
+
+@media (max-width: 768px) {
+  .btnText {
+    display: none;
+  }
+  .toolbarSub {
+    display: none;
+  }
+  .toolbarWorkflowName {
+    max-width: 120px;
+  }
 }
 
 .tbBtn:disabled {

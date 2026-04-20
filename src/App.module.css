@@ -4,6 +4,7 @@
   width: 100vw;
   overflow: hidden;
   background: var(--bg);
+  position: relative;
 }
 
 .main {
@@ -11,6 +12,8 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-width: 0;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .canvasWrap {
@@ -18,4 +21,13 @@
   display: flex;
   overflow: hidden;
   position: relative;
+}
+
+/* On mobile, if sidebar is open, we can dim the main content */
+@media (max-width: 1024px) {
+  .app:global(.sidebarOpen) .main {
+    transform: translateX(var(--mobile-sidebar-w));
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }

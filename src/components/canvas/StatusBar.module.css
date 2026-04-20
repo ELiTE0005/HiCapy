@@ -12,6 +12,12 @@
   flex-shrink: 0;
 }
 
+@media (max-width: 600px) {
+  .statusbar {
+    display: none;
+  }
+}
+
 .statusDot {
   width: 6px;
   height: 6px;

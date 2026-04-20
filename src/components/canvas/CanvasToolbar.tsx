@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useWorkflowStore } from '../../hooks/useWorkflowStore';
 import { showToast } from '../ui/Toast';
 import { ThemeSwitch } from '../ui/ThemeSwitch';
+import { Menu, X } from 'lucide-react';
 import styles from './CanvasToolbar.module.css';
 
 interface CanvasToolbarProps {
@@ -32,7 +33,7 @@ export const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
   onToggleTheme,
   lastSaved,
 }) => {
-  const { undo, redo, history, future } = useWorkflowStore();
+  const { undo, redo, history, future, isSidebarOpen, toggleSidebar } = useWorkflowStore();
   const [editing, setEditing] = useState(false);
   const [draftName, setDraftName] = useState(workflowName);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -54,9 +55,13 @@ export const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
 
   return (
     <div className={styles.toolbar}>
+      <button className={styles.menuBtn} onClick={toggleSidebar} title={isSidebarOpen ? "Close Menu" : "Open Menu"}>
+        {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
+      </button>
+
       <button className={styles.tbBtn} onClick={onNew} title="New Workflow">
         <svg viewBox="0 0 15 15" fill="none"><path d="M7.5 1v13M1 7.5h13" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/></svg>
-        New
+        <span className={styles.btnText}>New</span>
       </button>
       <div className={styles.toolbarSep} />
       <button className={styles.tbBtn} onClick={undo} disabled={history.length === 0} title="Undo (Ctrl+Z)">
@@ -89,12 +94,12 @@ export const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
 
       <button className={styles.tbBtn} onClick={onSave} title="Save workflow as JSON">
         <svg viewBox="0 0 15 15" fill="none"><path d="M2 3.5A1.5 1.5 0 013.5 2h7.086a1.5 1.5 0 011.06.44l.915.914A1.5 1.5 0 0113 4.414V12.5A1.5 1.5 0 0111.5 14h-8A1.5 1.5 0 012 12.5v-9z" stroke="currentColor" strokeWidth="1.2"/><rect x="5" y="2" width="5" height="3.5" rx="0.5" stroke="currentColor" strokeWidth="1.2"/><rect x="4" y="8" width="7" height="5" rx="0.5" stroke="currentColor" strokeWidth="1.2"/></svg>
-        Save
+        <span className={styles.btnText}>Save</span>
       </button>
       {onSaveAsTemplate && (
         <button className={styles.tbBtn} onClick={onSaveAsTemplate} title="Save as Custom Template">
           <svg viewBox="0 0 15 15" fill="none"><path d="M7.5 1L9.6 5.2L14 5.9L10.8 9L11.5 13.5L7.5 11.4L3.5 13.5L4.2 9L1 5.9L5.4 5.2L7.5 1Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/></svg>
-          Save Template
+          <span className={styles.btnText}>Save Template</span>
         </button>
       )}
       
@@ -102,16 +107,16 @@ export const CanvasToolbar: React.FC<CanvasToolbarProps> = ({
         <ThemeSwitch theme={theme} onChange={onToggleTheme} className={styles.tbBtn} />
         <button className={styles.tbBtn} id="btn-simulate" onClick={onSimulate}>
           <svg viewBox="0 0 15 15" fill="none"><path d="M3.5 2.5l9 5-9 5V2.5z" fill="currentColor"/></svg>
-          Simulate
+          <span className={styles.btnText}>Simulate</span>
         </button>
         <button className={`${styles.tbBtn} ${styles.primary}`} onClick={onDeploy}>
           <svg viewBox="0 0 15 15" fill="none"><path d="M7.5 1L13 7H9v7H6V7H2L7.5 1z" fill="white"/></svg>
-          Deploy
+          <span className={styles.btnText}>Deploy</span>
         </button>
         <div className={styles.toolbarSep} />
         <button className={styles.tbBtn} id="panel-toggle-btn" onClick={onTogglePanel}>
           <svg viewBox="0 0 15 15" fill="none"><path d="M2 4h11M2 8h11M2 12h7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg>
-          Panel
+          <span className={styles.btnText}>Panel</span>
         </button>
       </div>
     </div>

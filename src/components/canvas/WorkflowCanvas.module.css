@@ -41,12 +41,18 @@
 .minimap {
   bottom: 40px !important;
   right: 0px !important;
-  border-radius: var(--r) 0 0 var(--r) !important; /* Only left side rounded if flush to right, target says right:0 */
+  border-radius: var(--r) 0 0 var(--r) !important;
   overflow: hidden;
   border: 1px solid var(--border2) !important;
   background: var(--bg2) !important;
   box-shadow: 0 4px 16px rgba(0,0,0,0.4) !important;
   z-index: 5;
+}
+
+@media (max-width: 768px) {
+  .minimap {
+    display: none !important;
+  }
 }
 
 :global(.react-flow__minimap-mask) {

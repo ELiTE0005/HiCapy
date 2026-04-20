@@ -37,6 +37,8 @@
   --sidebar-w: 220px;
   --panel-w:   300px;
   --toolbar-h: 52px;
+  --mobile-panel-h: 65vh;
+  --mobile-sidebar-w: 260px;
   
   /* Legacy compat map */
   --bg-base:    var(--bg);
