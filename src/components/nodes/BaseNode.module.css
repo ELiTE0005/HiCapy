@@ -159,12 +159,28 @@
 
 /* Top color strip per type */
 .nodeStrip {
-  height: 2px;
-  border-radius: var(--r) var(--r) 0 0;
-  margin: -1px -1px 0;
+  height: 3px;
+  width: 100%;
+  border-radius: calc(var(--r) - 1px) calc(var(--r) - 1px) 0 0;
 }
 .ntStart .nodeStrip { background: linear-gradient(90deg, #16a34a, #4ade80); }
 .ntTask .nodeStrip { background: linear-gradient(90deg, #1d4ed8, #818cf8); }
 .ntApproval .nodeStrip { background: linear-gradient(90deg, #7c3aed, #c084fc); }
 .ntAuto .nodeStrip { background: linear-gradient(90deg, #b45309, #fb923c); }
 .ntEnd .nodeStrip { background: linear-gradient(90deg, #be123c, #fb7185); }
+
+.ntCondition .nodeIcon { background: rgba(234, 179, 8, 0.15); color: #eab308; }
+.ntCondition.selected { border-color: #eab308; box-shadow: 0 0 0 2px rgba(234, 179, 8, 0.25), 0 8px 32px rgba(0,0,0,0.5); }
+.ntCondition .nodeStrip { background: linear-gradient(90deg, #ca8a04, #facc15); }
+
+.ntEmail .nodeIcon { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+.ntEmail.selected { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25), 0 8px 32px rgba(0,0,0,0.5); }
+.ntEmail .nodeStrip { background: linear-gradient(90deg, #2563eb, #60a5fa); }
+
+.ntTimer .nodeIcon { background: rgba(100, 116, 139, 0.15); color: #64748b; }
+.ntTimer.selected { border-color: #64748b; box-shadow: 0 0 0 2px rgba(100, 116, 139, 0.25), 0 8px 32px rgba(0,0,0,0.5); }
+.ntTimer .nodeStrip { background: linear-gradient(90deg, #475569, #94a3b8); }
+
+.ntWebhook .nodeIcon { background: rgba(20, 184, 166, 0.15); color: #14b8a6; }
+.ntWebhook.selected { border-color: #14b8a6; box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.25), 0 8px 32px rgba(0,0,0,0.5); }
+.ntWebhook .nodeStrip { background: linear-gradient(90deg, #0d9488, #2dd4bf); }

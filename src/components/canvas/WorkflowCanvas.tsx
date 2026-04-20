@@ -20,6 +20,7 @@ import { ConditionNode } from '../nodes/ConditionNode';
 import { EmailNode } from '../nodes/EmailNode';
 import { TimerNode } from '../nodes/TimerNode';
 import { WebhookNode } from '../nodes/WebhookNode';
+import { RemovableEdge } from './RemovableEdge';
 import type { Node } from '@xyflow/react';
 import type {
   StartNodeData, TaskNodeData, ApprovalNodeData,
@@ -38,6 +39,11 @@ const nodeTypes = {
   emailNode: EmailNode,
   timerNode: TimerNode,
   webhookNode: WebhookNode,
+};
+
+const edgeTypes = {
+  removableEdge: RemovableEdge,
+  smoothstep: RemovableEdge,
 };
 
 const defaultNodeData: Record<string, any> = {
@@ -124,8 +130,9 @@ export const WorkflowCanvas: React.FC<WorkflowCanvasProps> = ({ theme = 'dark' }
         onNodeClick={onNodeClick}
         onPaneClick={onPaneClick}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         fitView
-        deleteKeyCode="Backspace"
+        deleteKeyCode={['Backspace', 'Delete']}
         defaultEdgeOptions={{
           type: 'smoothstep',
           animated: true,

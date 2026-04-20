@@ -34,6 +34,10 @@ export const BaseNode: React.FC<BaseNodeProps> = ({
     approvalNode: styles.ntApproval,
     automatedStepNode: styles.ntAuto,
     endNode: styles.ntEnd,
+    conditionNode: styles.ntCondition,
+    emailNode: styles.ntEmail,
+    timerNode: styles.ntTimer,
+    webhookNode: styles.ntWebhook,
   };
 
   const currentTypeClass = typeClassMap[nodeType] || styles.ntTask;
@@ -51,11 +55,19 @@ export const BaseNode: React.FC<BaseNodeProps> = ({
       <div className={styles.nodeStrip}></div>
       
       {showTarget && (
-        <Handle
-          type="target"
-          position={Position.Top}
-          className={`${styles.handle} ${styles.handleTop}`}
-        />
+        <>
+          <Handle
+            type="target"
+            position={Position.Top}
+            className={`${styles.handle} ${styles.handleTop}`}
+          />
+          <Handle
+            type="target"
+            id="left"
+            position={Position.Left}
+            className={`${styles.handle} ${styles.handleLeft}`}
+          />
+        </>
       )}
       
       <div className={styles.nodeHeader}>
@@ -80,13 +92,20 @@ export const BaseNode: React.FC<BaseNodeProps> = ({
       )}
 
       {showSource && (
-        <Handle
-          type="source"
-          position={Position.Bottom}
-          className={`${styles.handle} ${styles.handleBottom}`}
-        />
+        <>
+          <Handle
+            type="source"
+            position={Position.Bottom}
+            className={`${styles.handle} ${styles.handleBottom}`}
+          />
+          <Handle
+            type="source"
+            id="right"
+            position={Position.Right}
+            className={`${styles.handle} ${styles.handleRight}`}
+          />
+        </>
       )}
-      {/* We can add left/right handles if needed based on the workflow, but standardizing to Top/Bottom is best for auto layout */}
     </div>
   );
 };

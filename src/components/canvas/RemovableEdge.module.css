@@ -1,0 +1,32 @@
+.edgeButton {
+  width: 24px;
+  height: 24px;
+  background: var(--bg2);
+  border: 1.5px solid var(--border2);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text3);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: all;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+.edgeButton:hover,
+.edgeButton.selected {
+  opacity: 1;
+  background: var(--red);
+  border-color: var(--red);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
+
+.edgeButton svg {
+  width: 14px;
+  height: 14px;
+}

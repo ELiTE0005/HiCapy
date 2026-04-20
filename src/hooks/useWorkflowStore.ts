@@ -36,6 +36,7 @@ interface WorkflowState {
   updateNodeData: (id: string, data: Partial<Node['data']>) => void;
   addNode: (node: Node) => void;
   deleteNode: (id: string) => void;
+  deleteEdge: (id: string) => void;
 
   // History
   undo: () => void;
@@ -128,6 +129,13 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
       nodes: s.nodes.filter((n) => n.id !== id),
       edges: s.edges.filter((e) => e.source !== id && e.target !== id),
       selectedNodeId: s.selectedNodeId === id ? null : s.selectedNodeId,
+    }));
+  },
+
+  deleteEdge: (id) => {
+    get().saveSnapshot();
+    set((s) => ({
+      edges: s.edges.filter((e) => e.id !== id),
     }));
   },
 
