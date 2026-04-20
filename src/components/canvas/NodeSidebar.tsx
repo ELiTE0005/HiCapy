@@ -9,7 +9,7 @@ interface NodeSidebarProps {
 
 export const NodeSidebar: React.FC<NodeSidebarProps> = ({ onTemplateLoad, customTemplateKeys = [] }) => {
   const [activeNav, setActiveNav] = useState('Workflows');
-  const { nodes, setSidebarOpen } = useWorkflowStore();
+  const { nodes } = useWorkflowStore();
 
   const totalApprovals = nodes.filter(n => n.type === 'approvalNode').length;
   const totalAuto = nodes.filter(n => n.type === 'automatedStepNode' || n.type === 'automatedNode').length;
@@ -36,7 +36,6 @@ export const NodeSidebar: React.FC<NodeSidebarProps> = ({ onTemplateLoad, custom
         <img src="/favicon.svg" alt="HiCapy" className={styles.logoMark} style={{ background: 'white', padding: '4px', objectFit: 'contain' }} />
         <span className={styles.logoText}>HiCapy</span>
         <span className={styles.logoBadge}>HR</span>
-        <button className={styles.mobileClose} onClick={() => setSidebarOpen(false)} aria-label="Close sidebar">✕</button>
       </div>
       
       <div className={styles.sidebarScroll}>

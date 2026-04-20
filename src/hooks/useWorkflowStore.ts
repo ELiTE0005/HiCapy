@@ -50,7 +50,13 @@ interface WorkflowState {
   setWorkflow: (nodes: Node[], edges: Edge[]) => void;
   setNodes: (nodes: Node[]) => void;
   setEdges: (edges: Edge[]) => void;
+  
+  // Real-time Validation
+  validationErrors: Record<string, string[]>;
+  validate: () => void;
 }
+
+import { validateWorkflow, buildErrorMap } from '../utils/graphValidation';
 
 function snapshot(nodes: Node[], edges: Edge[]): HistorySnapshot {
   return {
@@ -68,6 +74,13 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
   toggleSidebar: () => set((s) => ({ isSidebarOpen: !s.isSidebarOpen })),
   history: [],
   future: [],
+  validationErrors: {},
+
+  validate: () => {
+    const { nodes, edges } = get();
+    const result = validateWorkflow(nodes, edges);
+    set({ validationErrors: buildErrorMap(result.errors) });
+  },
 
   simulationState: {
     isRunning: false,
@@ -91,12 +104,14 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
     const significant = changes.some((c) => c.type === 'remove' || c.type === 'add');
     if (significant) get().saveSnapshot();
     set((s) => ({ nodes: applyNodeChanges(changes, s.nodes) }));
+    get().validate();
   },
 
   onEdgesChange: (changes) => {
     const significant = changes.some((c) => c.type === 'remove' || c.type === 'add');
     if (significant) get().saveSnapshot();
     set((s) => ({ edges: applyEdgeChanges(changes, s.edges) }));
+    get().validate();
   },
 
   onConnect: (connection) => {
@@ -112,6 +127,7 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
         s.edges
       ),
     }));
+    get().validate();
   },
 
   selectNode: (id) => set({ selectedNodeId: id }),
@@ -136,6 +152,7 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
       edges: s.edges.filter((e) => e.source !== id && e.target !== id),
       selectedNodeId: s.selectedNodeId === id ? null : s.selectedNodeId,
     }));
+    get().validate();
   },
 
   deleteEdge: (id) => {
@@ -143,6 +160,7 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
     set((s) => ({
       edges: s.edges.filter((e) => e.id !== id),
     }));
+    get().validate();
   },
 
   undo: () => {
@@ -176,6 +194,7 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
   setWorkflow: (nodes, edges) => {
     get().saveSnapshot();
     set({ nodes, edges, selectedNodeId: null });
+    get().validate();
   },
 
   setNodes: (nodes) => set({ nodes }),

@@ -7,7 +7,9 @@ import styles from './NodeCommon.module.css';
 
 export const AutomatedStepNode: React.FC<NodeProps> = ({ id, data, selected }) => {
   const d = data as unknown as AutomatedStepNodeData;
-  const { simulationState } = useWorkflowStore();
+  const { simulationState, validationErrors } = useWorkflowStore();
+  const errors = validationErrors[id] || [];
+
   const isExecuted = simulationState.executedNodes.includes(id);
   const isRunning = simulationState.currentNodeId === id;
   const paramCount = Object.keys(d.params || {}).length;
@@ -18,7 +20,7 @@ export const AutomatedStepNode: React.FC<NodeProps> = ({ id, data, selected }) =
       label={d.title || d.label || 'Automated Step'}
       subtitle={d.actionId ? `Action: ${d.actionId}` : 'System action'}
       selected={selected}
-      hasErrors={(d.validationErrors?.length ?? 0) > 0}
+      hasErrors={errors.length > 0}
       nodeType="automatedStepNode"
     >
       <div className={styles.meta}>

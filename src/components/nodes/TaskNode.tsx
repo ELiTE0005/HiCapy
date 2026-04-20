@@ -7,7 +7,8 @@ import styles from './NodeCommon.module.css';
 
 export const TaskNode: React.FC<NodeProps> = ({ id, data, selected }) => {
   const d = data as unknown as TaskNodeData;
-  const { simulationState } = useWorkflowStore();
+  const { simulationState, validationErrors } = useWorkflowStore();
+  const errors = validationErrors[id] || [];
 
   const isExecuted = simulationState.executedNodes.includes(id);
   const isRunning = simulationState.currentNodeId === id;
@@ -19,7 +20,7 @@ export const TaskNode: React.FC<NodeProps> = ({ id, data, selected }) => {
       label={d.title || d.label || 'Data Collection'}
       subtitle={d.assignee ? `Assignee: ${d.assignee}` : 'Human task'}
       selected={selected}
-      hasErrors={(d.validationErrors?.length ?? 0) > 0}
+      hasErrors={errors.length > 0}
       nodeType="taskNode"
     >
       <div className={styles.meta}>

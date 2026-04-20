@@ -7,7 +7,8 @@ import styles from './NodeCommon.module.css';
 
 export const ApprovalNode: React.FC<NodeProps> = ({ id, data, selected }) => {
   const d = data as unknown as ApprovalNodeData;
-  const { simulationState } = useWorkflowStore();
+  const { simulationState, validationErrors } = useWorkflowStore();
+  const errors = validationErrors[id] || [];
 
   const isExecuted = simulationState.executedNodes.includes(id);
   const isRunning = simulationState.currentNodeId === id;
@@ -15,10 +16,10 @@ export const ApprovalNode: React.FC<NodeProps> = ({ id, data, selected }) => {
     <BaseNode
       accentColor="#c084fc"
       icon="🛡️"
-      label={d.title || d.label || 'Legal Review'}
-      subtitle={d.approverRole ? `Approver: ${d.approverRole}` : 'Approval step'}
+      label={d.title || d.label || 'Manager Approval'}
+      subtitle={d.role ? `Role: ${d.role}` : 'Manual approval'}
       selected={selected}
-      hasErrors={(d.validationErrors?.length ?? 0) > 0}
+      hasErrors={errors.length > 0}
       nodeType="approvalNode"
     >
       <div className={styles.meta}>

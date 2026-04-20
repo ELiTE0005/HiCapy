@@ -7,10 +7,11 @@ import styles from './NodeCommon.module.css';
 
 export const StartNode: React.FC<NodeProps> = ({ id, data, selected }) => {
   const d = data as unknown as StartNodeData;
-  const { simulationState } = useWorkflowStore();
+  const { simulationState, validationErrors } = useWorkflowStore();
   
   const isExecuted = simulationState.executedNodes.includes(id);
   const isRunning = simulationState.currentNodeId === id;
+  const errors = validationErrors[id] || [];
   const metaCount = Object.keys(d.metadata || {}).length;
   return (
     <BaseNode
@@ -19,7 +20,7 @@ export const StartNode: React.FC<NodeProps> = ({ id, data, selected }) => {
       label={d.startTitle || d.label || 'Start'}
       subtitle="Workflow entry point"
       selected={selected}
-      hasErrors={(d.validationErrors?.length ?? 0) > 0}
+      hasErrors={errors.length > 0}
       showTarget={false}
       nodeType="startNode"
     >

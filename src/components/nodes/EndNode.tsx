@@ -7,17 +7,19 @@ import styles from './NodeCommon.module.css';
 
 export const EndNode: React.FC<NodeProps> = ({ id, data, selected }) => {
   const d = data as unknown as EndNodeData;
-  const { simulationState } = useWorkflowStore();
+  const { simulationState, validationErrors } = useWorkflowStore();
+  const errors = validationErrors[id] || [];
+
   const isExecuted = simulationState.executedNodes.includes(id);
   const isRunning = simulationState.currentNodeId === id;
   return (
     <BaseNode
       accentColor="#fb7185"
       icon="🏁"
-      label={d.endMessage || d.label || 'End'}
+      label={d.label || 'End'}
       subtitle="Workflow completion"
       selected={selected}
-      hasErrors={(d.validationErrors?.length ?? 0) > 0}
+      hasErrors={errors.length > 0}
       showSource={false}
       nodeType="endNode"
     >
